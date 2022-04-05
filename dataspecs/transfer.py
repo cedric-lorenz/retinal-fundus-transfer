@@ -1,6 +1,7 @@
 import os
 
 sep = os.sep
+data_path = "/dhc/groups/bp2021cl1/data/retinas/"
 
 
 def get_label_drive(file_name):
@@ -36,7 +37,7 @@ def get_mask_HRF(file_name):
 
 
 def get_labels_stare(file_name):
-    return file_name.split('.')[0] + '.ah.pgm'
+    return file_name.split('.')[0] + '.vk.ppm'
 
 
 def get(resize=(896, 896)):
@@ -45,11 +46,11 @@ def get(resize=(896, 896)):
         'patch_shape': (388, 388),
         'patch_offset': (300, 300),
         'expand_by': (184, 184),
-        'data_dir': 'DRIVE' + sep + 'images',
-        'label_dir': 'DRIVE' + sep + 'manual',
-        'mask_dir': 'DRIVE' + sep + 'mask',
+        'data_dir': data_path + 'DRIVE' + sep + 'images',
+        'label_dir': data_path + 'DRIVE' + sep + '1st_manual',
+        'mask_dir': data_path + 'DRIVE' + sep + 'mask',
         'label_getter': get_label_drive,
-        'mask_getter': get_mask_drive,
+        # 'mask_getter': get_mask_drive,
         'resize': resize,
         'thr_manual': 50
     }
@@ -59,8 +60,8 @@ def get(resize=(896, 896)):
         'patch_shape': (388, 388),
         'patch_offset': (300, 300),
         'expand_by': (184, 184),
-        'data_dir': 'STARE' + sep + 'stare-images',
-        'label_dir': 'STARE' + sep + 'labels-ah',
+        'data_dir': data_path + 'STARE' + sep + 'images',
+        'label_dir': data_path + 'STARE' + sep + 'labels-vk',
         'label_getter': get_labels_stare,
         'resize': resize,
         'thr_manual': 50
@@ -71,8 +72,8 @@ def get(resize=(896, 896)):
         'patch_shape': (388, 388),
         'patch_offset': (300, 300),
         'expand_by': (184, 184),
-        'data_dir': 'AV-WIDE' + sep + 'images',
-        'label_dir': 'AV-WIDE' + sep + 'manual',
+        'data_dir': data_path + 'AV-WIDE' + sep + 'images',
+        'label_dir': data_path + 'AV-WIDE' + sep + 'manual',
         'label_getter': get_label_wide,
         'resize': resize,
         'thr_manual': 50
@@ -83,8 +84,8 @@ def get(resize=(896, 896)):
         'patch_shape': (388, 388),
         'patch_offset': (300, 300),
         'expand_by': (184, 184),
-        'data_dir': 'CHASEDB' + sep + 'images',
-        'label_dir': 'CHASEDB' + sep + 'manual',
+        'data_dir': data_path + 'CHASEDB1' + sep + 'images',
+        'label_dir': data_path + 'CHASEDB1' + sep + '1st_label',
         'label_getter': get_label_chasedb,
         'resize': resize,
         'thr_manual': 50
@@ -95,9 +96,9 @@ def get(resize=(896, 896)):
         'patch_shape': (388, 388),
         'patch_offset': (300, 300),
         'expand_by': (184, 184),
-        'data_dir': 'HRF' + sep + 'images',
-        'label_dir': 'HRF' + sep + 'manual',
-        'mask_dir': 'HRF' + sep + 'mask',
+        'data_dir': data_path + 'HRF' + sep + 'images',
+        'label_dir': data_path + 'HRF' + sep + 'manual1',
+        'mask_dir': data_path + 'HRF' + sep + 'mask',
         'label_getter': get_label_HRF,
         'mask_getter': get_mask_HRF,
         'resize': resize,
@@ -109,9 +110,9 @@ def get(resize=(896, 896)):
         'patch_shape': (388, 388),
         'patch_offset': (300, 300),
         'expand_by': (184, 184),
-        'data_dir': 'IOSTAR' + sep + 'image',
-        'label_dir': 'IOSTAR' + sep + 'Vessel_GT',
-        'mask_dir': 'IOSTAR' + sep + 'mask',
+        'data_dir': data_path + 'IOSTAR' + sep + 'image',
+        'label_dir': data_path + 'IOSTAR' + sep + 'Vessel_GT',
+        'mask_dir': data_path + 'IOSTAR' + sep + 'mask',
         'label_getter': get_label_iostar,
         'mask_getter': get_mask_iostar,
         'resize': resize,

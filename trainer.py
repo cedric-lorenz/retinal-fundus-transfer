@@ -9,7 +9,7 @@ import torchvision.transforms as tmf
 from PIL import Image as IMG
 from easytorch import ETTrainer, Prf1a, ETMeter
 from easytorch.vision import (merge_patches)
-from easytorch.vision.imgdataset2d import BinarySemSegImgPatchDataset
+from easytorch.vision.imgdataset2d import BinaryPatchDataset
 from easytorch.vision.transforms import RandomGaussJitter
 
 from models import UNet
@@ -17,7 +17,7 @@ from models import UNet
 sep = os.sep
 
 
-class BinarySemSegImgPatchDatasetCustomTransform(BinarySemSegImgPatchDataset):
+class BinarySemSegImgPatchDatasetCustomTransform(BinaryPatchDataset):
 
     def get_transforms(self):
         if self.mode == "test":
@@ -64,7 +64,8 @@ class BinarySemSegImgPatchDatasetCustomTransform(BinarySemSegImgPatchDataset):
 class VesselSegTrainer(ETTrainer):
 
     def _init_nn_model(self):
-        self.nn['model'] = UNet(self.args['num_channel'], self.args['num_class'], reduce_by=self.args['model_scale'])
+        self.nn['model'] = UNet(
+            self.args['num_channel'], self.args['num_class'], reduce_by=self.args['model_scale'])
 
     def _init_optimizer(self):
         first_model = list(self.nn.keys())[0]
@@ -89,7 +90,8 @@ class VesselSegTrainer(ETTrainer):
 
         wt = None
         if self.args.get('random_class_weights') is not None:
-            wt = torch.randint(1, 101, (self.args['num_class'],), device=self.device['gpu']).float()
+            wt = torch.randint(
+                1, 101, (self.args['num_class'],), device=self.device['gpu']).float()
 
         elif self.args.get('class_weights') is not None:
             wt = self.cache.setdefault('class_weights', torch.from_numpy(
@@ -123,7 +125,8 @@ class VesselSegTrainer(ETTrainer):
         Auto gather all the predicted patches of one image and merge together by calling as follows."""
         img_shape = obj.array.shape[:2]
         patches = its['output']()[:, 1, :, :].cpu().numpy() * 255
-        img = merge_patches(patches, img_shape, dspec['patch_shape'], dspec['patch_offset'])
+        img = merge_patches(patches, img_shape,
+                            dspec['patch_shape'], dspec['patch_offset'])
 
         _dset_dir = self.cache['log_dir']
         if self.args.get('pooled_run'):
@@ -133,7 +136,8 @@ class VesselSegTrainer(ETTrainer):
         IMG.fromarray(img).save(_dset_dir + sep + file.split('.')[0] + '.png')
 
         patches = its['predictions']().cpu().numpy() * 255
-        pred = merge_patches(patches, img_shape, dspec['patch_shape'], dspec['patch_offset'])
+        pred = merge_patches(patches, img_shape,
+                             dspec['patch_shape'], dspec['patch_offset'])
         sc = Prf1a()
         sc.add(torch.Tensor(pred), torch.Tensor(obj.ground_truth))
         return ETMeter(prf1a=sc)

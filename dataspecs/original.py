@@ -1,6 +1,7 @@
 import os
 
 sep = os.sep
+data_path = "/dhc/groups/bp2021cl1/data/retinas/"
 
 """--------------------------------------------------------------------------"""
 
@@ -18,10 +19,10 @@ DRIVE = {
     'patch_shape': (388, 388),
     'patch_offset': (300, 300),
     'expand_by': (184, 184),
-    'data_dir': 'DRIVE' + sep + 'images',
-    'label_dir': 'DRIVE' + sep + 'manual',
-    'split_dir': 'DRIVE' + sep + 'splits',
-    'mask_dir': 'DRIVE' + sep + 'mask',
+    'data_dir': data_path + 'DRIVE' + sep + 'images',
+    'label_dir': data_path + 'DRIVE' + sep + 'manual',
+    'split_dir': data_path + 'DRIVE' + sep + 'splits',
+    'mask_dir': data_path + 'DRIVE' + sep + 'mask',
     'label_getter': get_label_drive,
     'mask_getter': get_mask_drive
 }
@@ -38,9 +39,9 @@ STARE = {
     'patch_shape': (388, 388),
     'patch_offset': (300, 300),
     'expand_by': (184, 184),
-    'data_dir': 'STARE' + sep + 'stare-images',
-    'label_dir': 'STARE' + sep + 'labels-ah',
-    'split_dir': 'STARE' + sep + 'splits',
+    'data_dir': data_path + 'STARE' + sep + 'images',
+    'label_dir': data_path + 'STARE' + sep + 'labels-vk',
+    'split_dir': data_path + 'STARE' + sep + 'splits',
     'label_getter': get_labels_stare,
 }
 
@@ -74,9 +75,9 @@ CHASEDB = {
     'patch_shape': (388, 388),
     'patch_offset': (300, 300),
     'expand_by': (184, 184),
-    'data_dir': 'CHASEDB' + sep + 'images',
-    'label_dir': 'CHASEDB' + sep + 'manual',
-    'split_dir': 'CHASEDB' + sep + 'splits',
+    'data_dir': data_path + 'CHASEDB1' + sep + 'images',
+    'label_dir': data_path + 'CHASEDB1' + sep + 'manual',
+    'split_dir': data_path + 'CHASEDB1' + sep + 'splits',
     'label_getter': get_label_chasedb
 }
 
@@ -97,10 +98,10 @@ HRF = {
     'patch_shape': (836, 836),
     'patch_offset': (650, 650),
     'expand_by': (184, 184),
-    'data_dir': 'HRF' + sep + 'images',
-    'label_dir': 'HRF' + sep + 'manual',
-    'mask_dir': 'HRF' + sep + 'mask',
-    'split_dir': 'HRF' + sep + 'splits',
+    'data_dir': data_path + 'HRF' + sep + 'images',
+    'label_dir': data_path + 'HRF' + sep + 'manual',
+    'mask_dir': data_path + 'HRF' + sep + 'mask',
+    'split_dir': data_path + 'HRF' + sep + 'splits',
     'label_getter': get_label_HRF,
     'mask_getter': get_mask_HRF
 }
